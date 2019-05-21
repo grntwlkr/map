@@ -11,9 +11,12 @@
     <link href='https://api.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.css' rel='stylesheet' />
     
 
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     
+    <script>
+
     
-    
+    </script>
 
     
     <!-- Bootstrap core CSS -->
@@ -103,7 +106,37 @@
                   <div class="card-body">
                     <h5 class="card-title">Add New Marker to Map</h5>
                     <p class="card-text">This is a test to add a new marker to my map.</p>
-                    <a href="#" class="btn btn-primary">Add Marker</a>
+                    <a href="#" class="btn btn-primary" onclick="addMarker()">Add Marker</a>
+                    
+                     <script>
+
+                     
+                        function addMarker() {
+                            const axios = require('axios');
+                            const url = "https://api.mapbox.com/datasets/v1/grntwlkr/cjvy6nmvx03zm2jpovxnb8rto?access_token=pk.eyJ1IjoiZ3JudHdsa3IiLCJhIjoiY2lxbXRjdHpuMDB5M2dpamZ0emIwaTRueiJ9.JT4VlUBUEX7efiy1Gr8wLg";
+        
+                            axios.get(url)
+                            .then(data=>console.log(data))
+                            .catch(err=>console.log(err))
+
+                /*                map.addLayer({
+                                id: 'locations',
+                                type: 'symbol',
+                                // Add a GeoJSON source containing place coordinates and information.
+                                source: {
+                                  type: 'geojson',
+                                  data: stores
+                                },
+                                layout: {
+                                  'icon-image': 'restaurant-15',
+                                  'icon-allow-overlap': true,
+                                }
+                              }); */
+
+                        }
+			  </script>
+                    
+                    
                   </div>
                 </div>
             

@@ -14,16 +14,7 @@
     
     
     
-    <script src="https://unpkg.com/@mapbox/mapbox-sdk/umd/mapbox-sdk.min.js"></script>
-    <script>
-        var mapboxClient = mapboxSdk({ accessToken: MY_ACCESS_TOKEN });
-        mapboxClient.styles.getStyle(..)
-            .send()
-            .then(..);
-        mapboxClient.tilesets.listTilesets(..)
-            .send()
-            .then(..);
-</script>
+
     
     <!-- Bootstrap core CSS -->
     <link href="./scripts/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -83,17 +74,41 @@
 </head>
   <body>
 
-  
-    <div id='map'></div>
-    <script>
-        mapboxgl.accessToken = 'pk.eyJ1IjoiZ3JudHdsa3IiLCJhIjoiY2lxbXRjdHpuMDB5M2dpamZ0emIwaTRueiJ9.JT4VlUBUEX7efiy1Gr8wLg';
-        const map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/grntwlkr/cjvy0v0660z2f1cplut2bp6kk',
-        center: [-111.418925, 33.580861],
-        zoom: 9.1
-        });
-    </script>
+    <div class="container">
+        <div class="row">
+        
+            <div class="col-3">
+            
+            
+            
+            </div>
+            
+            
+            <div class="col-9">
+            
+                <div id='map'></div>
+                    <script>
+                        mapboxgl.accessToken = 'pk.eyJ1IjoiZ3JudHdsa3IiLCJhIjoiY2lxbXRjdHpuMDB5M2dpamZ0emIwaTRueiJ9.JT4VlUBUEX7efiy1Gr8wLg';
+                        const map = new mapboxgl.Map({
+                        container: 'map',
+                        style: 'mapbox://styles/grntwlkr/cjvy0v0660z2f1cplut2bp6kk',
+                        center: [-111.418925, 33.580861],
+                        zoom: 9.1
+                        });
+                    </script>
+                            
+            
+            
+            </div>
+        
+        
+        </div>
+    
+    
+    
+    </div>
+    
+
      
 
 

@@ -143,7 +143,7 @@
                                 map.loadImage("https://i.imgur.com/MK4NUzI.png", function(error, image) {
                                 if (error) throw error;
                                 map.addImage("custom-marker", image);
-                                }
+                                
                                 map.addLayer({
                                 id: 'locations',
                                 type: 'symbol',
@@ -156,6 +156,7 @@
                                     "icon-image": "custom-marker",
                                 }
                               });
+                               });
                             }
                             
                             function generateSuccessHTMLOutput(response) {

@@ -122,7 +122,9 @@
                             }
                             
                             function performGetRequest() {
+                            
                              const url = "https://api.mapbox.com/datasets/v1/grntwlkr/cjvy6nmvx03zm2jpovxnb8rto/features?access_token=pk.eyJ1IjoiZ3JudHdsa3IiLCJhIjoiY2lxbXRjdHpuMDB5M2dpamZ0emIwaTRueiJ9.JT4VlUBUEX7efiy1Gr8wLg";
+                             
                               var resultElement = document.getElementById('getResponse');
                               resultElement.innerHTML = '';
                               
@@ -137,8 +139,7 @@
                             
                             
                             function generateSuccessHTMLOutput(response) {
-                              return   
-                                   
+                              return  '<h5>Data:</h5>' + 
                                       '<pre>' + JSON.stringify(response.data, null, '\t') + '</pre>'; 
                             }
                             function generateErrorHTMLOutput(error) {

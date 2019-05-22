@@ -125,55 +125,36 @@
                             
                              const url = "https://api.mapbox.com/datasets/v1/grntwlkr/cjvy6nmvx03zm2jpovxnb8rto/features?access_token=pk.eyJ1IjoiZ3JudHdsa3IiLCJhIjoiY2lxbXRjdHpuMDB5M2dpamZ0emIwaTRueiJ9.JT4VlUBUEX7efiy1Gr8wLg";
                              
-                              var resultElement = document.getElementById('getResponse');
-                              resultElement.innerHTML = '';
-                              
+                              // get json info from mapbox
                               axios.get(url)
                                 .then(function (response) {
-                                  resultElement.innerHTML = generateSuccessHTMLOutput(response);
                                   addMarkers(response);
                                 })
                                 .catch(function (error) {
-                                  resultElement.innerHTML = generateErrorHTMLOutput(error);
                                 });   
                             }
                             
                             function addMarkers(response) {
-                                var newLocations = response.data;
-                                map.loadImage("https://i.imgur.com/MK4NUzI.png", function(error, image) {
-                                if (error) throw error;
-                                map.addImage("custom-marker", image);
+                            
+                                // assign geoJson feature collection data to variable
+                                var geoJson = response.data;
                                 
-                                map.addLayer({
-                                id: 'locations',
-                                type: 'symbol',
-                                // Add a GeoJSON source containing place coordinates and information.
-                                source: {
-                                  type: 'geojson',
-                                  data: newLocations
-                                },
-                                layout: {
-                                    "icon-image": "custom-marker",
-                                }
-                              });
-                               });
+                                // add markers to map
+                                geoJson.features.forEach(function(marker) {
+                                    // create a DOM element for the marker
+                                    var el = document.createElement('div');
+                                    el.className = 'marker';
+                                    
+                                    // add marker to map
+                                    new mapboxgl.Marker(el)
+                                        .setLngLat(marker.geometry.coordinates)
+                                        .addTo(map);
+                                
+                                });
+
                             }
                             
-                            function generateSuccessHTMLOutput(response) {
-                              return  '<h5>Data:</h5>' + 
-                                      '<pre>' + JSON.stringify(response.data, null, '\t') + '</pre>'; 
-                            }
-                            function generateErrorHTMLOutput(error) {
-                              return  '<h4>Result</h4>' + 
-                                      '<h5>Message:</h5> ' + 
-                                      '<pre>' + error.message + '</pre>' +
-                                      '<h5>Status:</h5> ' + 
-                                      '<pre>' + error.response.status + ' ' + error.response.statusText + '</pre>' +
-                                      '<h5>Headers:</h5>' + 
-                                      '<pre>' + JSON.stringify(error.response.headers, null, '\t') + '</pre>' + 
-                                      '<h5>Data:</h5>' + 
-                                      '<pre>' + JSON.stringify(error.response.data, null, '\t') + '</pre>'; 
-                            }
+
 
                              
 

@@ -146,10 +146,6 @@
                                 // assign geoJson feature collection data to variable
                                 var geoJson = response.data;
                                 
-                                map.addSource('places', {
-                                  type: 'geojson',
-                                  data: geoJson
-                                });
                                 
                                 // add markers to map
                                 geoJson.features.forEach(function(marker) {

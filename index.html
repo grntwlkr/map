@@ -106,7 +106,7 @@
                   <div class="card-body">
                     <h5 class="card-title">Add New Marker to Map</h5>
                     <p class="card-text">This is a test to add a new marker to my map.</p>
-                    <a href="#" class="btn btn-primary" onclick="addMarker()">Add Marker</a>
+                    <a href="#" class="btn btn-primary" onclick="performGetRequest()">Add Marker</a>
                     
                      <script>
 
@@ -122,6 +122,7 @@
                             }
                             
                             function performGetRequest() {
+                             const url = "https://api.mapbox.com/datasets/v1/grntwlkr/cjvy6nmvx03zm2jpovxnb8rto/features?access_token=pk.eyJ1IjoiZ3JudHdsa3IiLCJhIjoiY2lxbXRjdHpuMDB5M2dpamZ0emIwaTRueiJ9.JT4VlUBUEX7efiy1Gr8wLg";
                               var resultElement = document.getElementById('getResponse');
                               resultElement.innerHTML = '';
                               
@@ -136,12 +137,8 @@
                             
                             
                             function generateSuccessHTMLOutput(response) {
-                              return  '<h4>Result</h4>' + 
-                                      '<h5>Status:</h5> ' + 
-                                      '<pre>' + response.status + ' ' + response.statusText + '</pre>' +
-                                      '<h5>Headers:</h5>' + 
-                                      '<pre>' + JSON.stringify(response.headers, null, '\t') + '</pre>' + 
-                                      '<h5>Data:</h5>' + 
+                              return   
+                                   
                                       '<pre>' + JSON.stringify(response.data, null, '\t') + '</pre>'; 
                             }
                             function generateErrorHTMLOutput(error) {

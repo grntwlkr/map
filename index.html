@@ -131,12 +131,30 @@
                               axios.get(url)
                                 .then(function (response) {
                                   resultElement.innerHTML = generateSuccessHTMLOutput(response);
+                                  addMarkers(response);
                                 })
                                 .catch(function (error) {
                                   resultElement.innerHTML = generateErrorHTMLOutput(error);
                                 });   
                             }
                             
+                            function addMarkers(response) {
+                                var newLocations = response.data;
+                                
+                                map.addLayer({
+                                id: 'locations',
+                                type: 'symbol',
+                                // Add a GeoJSON source containing place coordinates and information.
+                                source: {
+                                  type: 'geojson',
+                                  data: newLocations
+                                },
+                                layout: {
+                                  'icon-image': 'restaurant-15',
+                                  'icon-allow-overlap': true,
+                                }
+                              });
+                            }
                             
                             function generateSuccessHTMLOutput(response) {
                               return  '<h5>Data:</h5>' + 
@@ -154,19 +172,7 @@
                                       '<pre>' + JSON.stringify(error.response.data, null, '\t') + '</pre>'; 
                             }
 
-                /*                map.addLayer({
-                                id: 'locations',
-                                type: 'symbol',
-                                // Add a GeoJSON source containing place coordinates and information.
-                                source: {
-                                  type: 'geojson',
-                                  data: stores
-                                },
-                                layout: {
-                                  'icon-image': 'restaurant-15',
-                                  'icon-allow-overlap': true,
-                                }
-                              }); */
+                             
 
                         
 			  </script>

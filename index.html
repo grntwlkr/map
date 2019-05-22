@@ -141,7 +141,7 @@
                                 });   
                             }
                             
-                            function addMarkers(response) {
+                            function addMarkerss(response) {
                             
                                 // assign geoJson feature collection data to variable
                                 var stores = response.data;
@@ -202,13 +202,7 @@
                     
                     const url = "https://api.mapbox.com/datasets/v1/grntwlkr/cjvy6nmvx03zm2jpovxnb8rto/features?access_token=pk.eyJ1IjoiZ3JudHdsa3IiLCJhIjoiY2lxbXRjdHpuMDB5M2dpamZ0emIwaTRueiJ9.JT4VlUBUEX7efiy1Gr8wLg";
                              
-                              // get json info from mapbox
-                              axios.get(url)
-                                .then(function (response) {
-                                  addMarkers(response);
-                                })
-                                .catch(function (error) {
-                                }); 
+
                     
                         mapboxgl.accessToken = 'pk.eyJ1IjoiZ3JudHdsa3IiLCJhIjoiY2lxbXRjdHpuMDB5M2dpamZ0emIwaTRueiJ9.JT4VlUBUEX7efiy1Gr8wLg';
                         var map = new mapboxgl.Map({
@@ -218,9 +212,22 @@
                         zoom: 9.1
                         });
                         
+                        
+                        
                         map.on('load', function(e) {
                           // Add the data to your map as a layer
                                                             // assign geoJson feature collection data to variable
+                                                            
+                                                            
+                                                                      // get json info from mapbox
+                              axios.get(url)
+                                .then(function (response) {
+                                  addMarkers(response);
+                                })
+                                .catch(function (error) {
+                                }); 
+                                
+                                addMarkers(response){
                                 var stores = response.data;
                                 
                                 map.addSource('places', {
@@ -228,7 +235,7 @@
                                       data: stores
                                     });
                                 // add markers to map
-                                geoJson.features.forEach(function(marker) {
+                                stores.features.forEach(function(marker) {
                                 // Create a div element for the marker
                                   var el = document.createElement('div');
                                   // Add a class called 'marker' to each div
@@ -240,6 +247,7 @@
                                     .setLngLat(marker.geometry.coordinates)
                                     .addTo(map);
                                 });
+                                }
                         });
                         
                         

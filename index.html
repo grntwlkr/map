@@ -144,9 +144,12 @@
                             function addMarkers(response) {
                             
                                 // assign geoJson feature collection data to variable
-                                var geoJson = response.data;
+                                var stores = response.data;
                                 
-                                
+                                map.addSource('places', {
+                                      type: 'geojson',
+                                      data: stores
+                                    });
                                 // add markers to map
                                 geoJson.features.forEach(function(marker) {
                                 // Create a div element for the marker
@@ -195,13 +198,52 @@
             
                 <div id='map'></div>
                     <script>
+                    
+                    
+                    const url = "https://api.mapbox.com/datasets/v1/grntwlkr/cjvy6nmvx03zm2jpovxnb8rto/features?access_token=pk.eyJ1IjoiZ3JudHdsa3IiLCJhIjoiY2lxbXRjdHpuMDB5M2dpamZ0emIwaTRueiJ9.JT4VlUBUEX7efiy1Gr8wLg";
+                             
+                              // get json info from mapbox
+                              axios.get(url)
+                                .then(function (response) {
+                                  addMarkers(response);
+                                })
+                                .catch(function (error) {
+                                }); 
+                    
                         mapboxgl.accessToken = 'pk.eyJ1IjoiZ3JudHdsa3IiLCJhIjoiY2lxbXRjdHpuMDB5M2dpamZ0emIwaTRueiJ9.JT4VlUBUEX7efiy1Gr8wLg';
-                        const map = new mapboxgl.Map({
+                        var map = new mapboxgl.Map({
                         container: 'map',
                         style: 'mapbox://styles/grntwlkr/cjvy0v0660z2f1cplut2bp6kk',
                         center: [-111.418925, 33.580861],
                         zoom: 9.1
                         });
+                        
+                        map.on('load', function(e) {
+                          // Add the data to your map as a layer
+                                                            // assign geoJson feature collection data to variable
+                                var stores = response.data;
+                                
+                                map.addSource('places', {
+                                      type: 'geojson',
+                                      data: stores
+                                    });
+                                // add markers to map
+                                geoJson.features.forEach(function(marker) {
+                                // Create a div element for the marker
+                                  var el = document.createElement('div');
+                                  // Add a class called 'marker' to each div
+                                  el.className = 'marker';
+                                  // By default the image for your custom marker will be anchored
+                                  // by its center. Adjust the position accordingly
+                                  // Create the custom markers, set their position, and add to map
+                                  new mapboxgl.Marker(el, { offset: [0, -23] })
+                                    .setLngLat(marker.geometry.coordinates)
+                                    .addTo(map);
+                                });
+                        });
+                        
+                        
+                        
                     </script>
                             
             

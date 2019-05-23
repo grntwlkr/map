@@ -153,21 +153,28 @@
                      
                      function performPutRequest(){
                      
-                        var putURL = "https://api.mapbox.com/datasets/v1/grntwlkr/cjvy6nmvx03zm2jpovxnb8rto/features/" + geocoder._typeahead.selected.text + "?access_token=sk.eyJ1IjoiZ3JudHdsa3IiLCJhIjoiY2p2eTh1ZW00MGRkcTN5cDhnY2FrbGZtYyJ9.RKc8Zmo_BqEyy8eH7tLpKQ";
+                        var putURL = "https://api.mapbox.com/datasets/v1/grntwlkr/cjvy6nmvx03zm2jpovxnb8rto/features/newFeature?access_token=sk.eyJ1IjoiZ3JudHdsa3IiLCJhIjoiY2p2eTh1ZW00MGRkcTN5cDhnY2FrbGZtYyJ9.RKc8Zmo_BqEyy8eH7tLpKQ";
+                        
+                        var myData = {
+                                      "id": "newFeature",
+                                      "type": "Feature",
+                                      "properties": {
+                                        "title": "test",
+                                        "description": "did it work"
+                                      },
+                                      "geometry": {
+                                        "coordinates": [
+                                          -112.06936865629845,
+                                          33.45177594247406
+                                        ],
+                                        "type": "Point"
+                                      }
+                                    }
+                                        
+                                        
+
                      
-                            axios.post(putURL, {
-                            
-                            "id": geocoder._typeahead.selected.text,
-                              "type": "Feature",
-                              "geometry": {
-                                "type": "point",
-                                "coordinates": geocoder._typeahead.selected.center
-                              },
-                              "properties": {
-                                "Title": geocoder._typeahead.selected.text,
-                                "Description" : document.getElementById('newDescription').value
-                              }
-                            })
+                            axios.post(putURL, myData)
                                 .then(function (response) {
                                     console.log(response);
                                 })

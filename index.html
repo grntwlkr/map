@@ -120,86 +120,36 @@
                         <div id='geocoder' class='geocoder'></div>
                       </div>
                       
+                      
+                      <fieldset disabled>
+                      
                       <div class="form-group">
                         <label for="newName">Location Name</label>
-                        <input type="text" class="form-control" id="newName" placeholder="Location Name">
+                        <input type="text" class="form-control" id="newName" placeholder="">
                       </div>
-                      
-                      <div class="form-group">
-                        <label for="newDescription">Description</label>
-                        <input type="text" class="form-control" id="newDescription" placeholder="Location Description">
-                      </div>
-                      
-
-
-                      
+                   
                       <div class="form-group">
                         <label for="newAddress">Address</label>
                         <input type="text" class="form-control" id="newAddress" placeholder="">
                       </div>
                       
+                      <div class="form-group">
+                        <label for="newLatLong">Location</label>
+                        <input type="text" class="form-control" id="newLatLong" placeholder="">
+                      </div>
+                      
+                      </fieldset>
+                      
+                      <div class="form-group">
+                        <label for="newDescription">Description</label>
+                        <input type="text" class="form-control" id="newDescription" placeholder="Add an optional description">
+                      </div>
 
-                      <button type="submit" class="btn btn-primary" onclick="performGetRequest()">Submit</button>
+                      <button type="submit" class="btn btn-primary" onclick="performPutRequest()">Add Location to Map</button>
                     </form>
 
                     
-                     <script>
-
                      
-                        function addMarker() {
-
-                            const url = "https://api.mapbox.com/datasets/v1/grntwlkr/cjvy6nmvx03zm2jpovxnb8rto/features?access_token=pk.eyJ1IjoiZ3JudHdsa3IiLCJhIjoiY2lxbXRjdHpuMDB5M2dpamZ0emIwaTRueiJ9.JT4VlUBUEX7efiy1Gr8wLg";
-        
-                            axios.get(url)
-                            .then(data=>console.log(data))
-                            .catch(err=>console.log(err))
-                            
-                            }
-                            
-                            function performGetRequest() {
-                            
-                             const url = "https://api.mapbox.com/datasets/v1/grntwlkr/cjvy6nmvx03zm2jpovxnb8rto/features?access_token=pk.eyJ1IjoiZ3JudHdsa3IiLCJhIjoiY2lxbXRjdHpuMDB5M2dpamZ0emIwaTRueiJ9.JT4VlUBUEX7efiy1Gr8wLg";
-                             
-                              // get json info from mapbox
-                              axios.get(url)
-                                .then(function (response) {
-                                  addMarkers(response);
-                                })
-                                .catch(function (error) {
-                                });   
-                            }
-                            
-                            function addMarkerss(response) {
-                            
-                                // assign geoJson feature collection data to variable
-                                var stores = response.data;
-                                
-                                map.addSource('places', {
-                                      type: 'geojson',
-                                      data: stores
-                                    });
-                                // add markers to map
-                                geoJson.features.forEach(function(marker) {
-                                // Create a div element for the marker
-                                  var el = document.createElement('div');
-                                  // Add a class called 'marker' to each div
-                                  el.className = 'marker';
-                                  // By default the image for your custom marker will be anchored
-                                  // by its center. Adjust the position accordingly
-                                  // Create the custom markers, set their position, and add to map
-                                  new mapboxgl.Marker(el, { offset: [0, -23] })
-                                    .setLngLat(marker.geometry.coordinates)
-                                    .addTo(map);
-                                });
-
-                            }
-                            
-
-
-                             
-
-                        
-			  </script>
                     
                     
                   </div>
@@ -283,6 +233,9 @@
                                 }
                         });
                         
+                        geocoder.on('result', function(ev) {document.getElementById('newName').value=geocoder._typeahead.selected.text} )
+                        geocoder.on('result', function(ev) {document.getElementById('newAddress').value=geocoder._typeahead.selected.place_name} )
+                        geocoder.on('result', function(ev) {document.getElementById('newName').value=geocoder._typeahead.selected.center} )
                         
                         
                     </script>

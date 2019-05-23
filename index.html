@@ -149,7 +149,35 @@
                     </form>
 
                     
+                     <script>
                      
+                     function performPutRequest(){
+                     
+                        var putURL = "https://api.mapbox.com/datasets/v1/grntwlkr/cjvy6nmvx03zm2jpovxnb8rto/features/" + geocoder._typeahead.selected.text + "?access_token=sk.eyJ1IjoiZ3JudHdsa3IiLCJhIjoiY2p2eTh1ZW00MGRkcTN5cDhnY2FrbGZtYyJ9.RKc8Zmo_BqEyy8eH7tLpKQ";
+                     
+                            axios.post(putURL, {
+                            
+                            "id": geocoder._typeahead.selected.text,
+                              "type": "Feature",
+                              "geometry": {
+                                "type": "point",
+                                "coordinates": geocoder._typeahead.selected.center
+                              },
+                              "properties": {
+                                "Title": geocoder._typeahead.selected.text,
+                                "Description" : document.getElementById('newDescription').value
+                              }
+                            })
+                                .then(function (response) {
+                                    console.log(response);
+                                })
+                                .catch(function (error) {
+                                    console.log(error);
+                                }); 
+                     }
+                     
+                     
+                     </script>
                     
                     
                   </div>
@@ -235,7 +263,7 @@
                         
                         geocoder.on('result', function(ev) {document.getElementById('newName').value=geocoder._typeahead.selected.text} )
                         geocoder.on('result', function(ev) {document.getElementById('newAddress').value=geocoder._typeahead.selected.place_name} )
-                        geocoder.on('result', function(ev) {document.getElementById('newName').value=geocoder._typeahead.selected.center} )
+                        geocoder.on('result', function(ev) {document.getElementById('newLatLong').value=geocoder._typeahead.selected.center} )
                         
                         
                     </script>
